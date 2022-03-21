@@ -6,9 +6,12 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.commands.TankDrive;
+import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -18,15 +21,40 @@ import edu.wpi.first.wpilibj2.command.Command;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  public final static DriveTrain m_DriveTrain = new DriveTrain();
 
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-
+  public final TankDrive m_TankDrive = new TankDrive();
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
   }
+  public static Joystick XboxC = new Joystick(Constants.JOYSTICK_PORT);
+
+  public static double getDeadZone (int axis){
+    if (Math.abs(XboxC.getRawAxis(axis)) < 0.1) {
+      return 0.0;
+    } else {
+      return XboxC.getRawAxis(axis);
+    }
+  }
+  
+  //Controller buttons
+  public static JoystickButton AB = new JoystickButton(XboxC, 1);
+  public static JoystickButton BB = new JoystickButton(XboxC, 2);
+  public static JoystickButton XB = new JoystickButton(XboxC, 3);
+  public static JoystickButton YB = new JoystickButton(XboxC, 4);
+  public static JoystickButton LB = new JoystickButton(XboxC, 5);
+  public static JoystickButton RB = new JoystickButton(XboxC, 6);
+  public static JoystickButton HB = new JoystickButton(XboxC, 7);
+  public static JoystickButton ZB = new JoystickButton(XboxC, 8);
+  public static JoystickButton LJB = new JoystickButton(XboxC, 9);
+  public static JoystickButton RJB = new JoystickButton(XboxC, 10);
+  //Dpad
+  public static POVButton up = new POVButton(XboxC, 0);
+  public static POVButton right = new POVButton(XboxC, 90);
+  public static POVButton down = new POVButton(XboxC, 180);
+  public static POVButton left = new POVButton(XboxC, 270);
 
   /**
    * Use this method to define your button->command mappings. Buttons can be created by
@@ -43,6 +71,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+    return m_TankDrive;
   }
 }
