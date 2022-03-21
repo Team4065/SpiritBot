@@ -14,11 +14,14 @@ package frc.robot;
  */
 public final class Constants {
     //RoboRio PWM
-    public static final int m_BackRightM = 0;
-    public static final int m_FrontLeftM = 1;
-    public static final int m_BackLeftM = 2;
-    public static final int m_FrontRightM = 3;
+    public static final int m_LeftMotor = 0;
+    public static final int m_RightMotor = 1;
+    public static final int m_TiltMotor = 2;
+    //Motor Inverts
     public static final boolean m_LeftSideInvert = true;
     public static final boolean m_RightSideInvert = false;
+    //Contorller Port
     public static final int JOYSTICK_PORT = 0;
+    //presets
+    public static final int m_drivemode = 1;//Drive Modes 1 = Tank 2 = Arcade 3 = Curvature
 }

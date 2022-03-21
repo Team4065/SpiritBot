@@ -4,31 +4,24 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 
 public class DriveTrain extends SubsystemBase {
   /** Creates a new DriveTrain. */
   public DriveTrain() {
-    FLM.setInverted(Constants.m_LeftSideInvert);
-    BLM.setInverted(Constants.m_LeftSideInvert);
-
-    FRM.setInverted(Constants.m_RightSideInvert);
-    BRM.setInverted(Constants.m_RightSideInvert);
+    //left.setInverted(Constants.m_LeftSideInvert);
+    //right.setInverted(Constants.m_LeftSideInvert);
   }
-  // Creates Mortercontroller
-  //left
-  private Spark FLM = new Spark(Constants.m_FrontLeftM);
-  private Spark BLM = new Spark(Constants.m_BackLeftM);
+  // Creates Motorcontroller
   //Right
-  private Spark FRM = new Spark(Constants.m_FrontRightM);
-  private Spark BRM = new Spark(Constants.m_BackRightM);
-  // Creates Mortercontroller groups
-  public MotorControllerGroup left = new MotorControllerGroup(FLM, BLM);
-  public MotorControllerGroup right = new MotorControllerGroup(FRM, BRM);
-
+  private final Spark right = new Spark(Constants.m_RightMotor);
+  //left
+  private final Spark left = new Spark(1);
+  DifferentialDrive drive = new DifferentialDrive(left, right);
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
@@ -50,5 +43,17 @@ public class DriveTrain extends SubsystemBase {
 
   public void setRight(double speed) {
     right.set(speed);
+  }
+
+  public void setDrive(int driveMode) {
+    if (driveMode == 1) {
+      drive.tankDrive(RobotContainer.getDeadZone(1), RobotContainer.getDeadZone(5));
+    } else if (driveMode == 2) {
+      drive.arcadeDrive(RobotContainer.getDeadZone(1), RobotContainer.getDeadZone(4));
+    } else if (driveMode == 3) {
+      drive.curvatureDrive(RobotContainer.getDeadZone(1), RobotContainer.getDeadZone(4), false);
+    } else {
+      System.out.println("Error: Not a Drive Mode\n1 = Tank\n2 = Arcade\n3 = Curvature");
+    }
   }
 }
