@@ -24,4 +24,6 @@ public final class Constants {
     public static final int JOYSTICK_PORT = 0;
     //presets
     public static final int m_drivemode = 1;//Drive Modes 1 = Tank 2 = Arcade 3 = Curvature
+    public static final int m_FillValve = 0;
+    public static final int m_PSIGuage = 0;
 }

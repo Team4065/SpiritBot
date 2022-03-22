@@ -11,6 +11,7 @@ import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
 public class DriveTrain extends SubsystemBase {
+  public int driveMode = Constants.m_drivemode;
   /** Creates a new DriveTrain. */
   public DriveTrain() {
     //left.setInverted(Constants.m_LeftSideInvert);

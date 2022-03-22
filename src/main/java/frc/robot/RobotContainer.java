@@ -7,7 +7,11 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.Drive;
+import frc.robot.subsystems.Cannon;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.FillTankValve;
+import frc.robot.subsystems.FireValve;
+import frc.robot.subsystems.Horn;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -22,6 +26,10 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   public final static DriveTrain m_DriveTrain = new DriveTrain();
+  public final static Cannon M_Cannon = new Cannon();
+  public final static FireValve m_FireValve = new FireValve();
+  public final static Horn m_Horn = new Horn();
+  public final static FillTankValve m_FillTankValve = new FillTankValve();
 
   public final Drive m_TankDrive = new Drive();
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
