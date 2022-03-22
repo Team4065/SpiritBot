@@ -9,7 +9,6 @@ import frc.robot.subsystems.DriveTrain;
 
 public class Drive extends CommandBase {
   private DriveTrain driveTrain = new DriveTrain();
-  private int driveMode = 1;
   /** Creates a new TankDrive. */
   public Drive() {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -23,7 +22,7 @@ public class Drive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    driveTrain.setDrive(driveMode);
+    driveTrain.setDrive(driveTrain.driveMode);
   }
 
   // Called once the command ends or is interrupted.

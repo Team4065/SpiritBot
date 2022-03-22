@@ -29,8 +29,8 @@ public class fillToPSI extends CommandBase {
       RobotContainer.m_FillTankValve.setValve(true);
     } else if (psi <= RobotContainer.m_FillTankValve.getPSI()) {
       RobotContainer.m_FillTankValve.setValve(false);
+      end(false);
     }
-    end(false);
   }
 
   // Called once the command ends or is interrupted.

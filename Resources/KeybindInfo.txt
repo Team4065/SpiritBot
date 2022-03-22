@@ -7,16 +7,16 @@ Xbox Axis
 5-right y
 
 Xbox Button
-0-A
-1-B
-2-X
-3-Y
-4-left bumper
-5-right bumper
-6-view
-7-menu
-8-left stick down
-9-right stick down
+1-A
+2-B
+3-X
+4-Y
+5-left bumper
+6-right bumper
+7-view
+8-menu
+9-left stick down
+10-right stick down
 
 Xbox POV
 0-up
@@ -27,3 +27,5 @@ Xbox POV
 225-down & left
 270-left
 315-up & left
+
+hi

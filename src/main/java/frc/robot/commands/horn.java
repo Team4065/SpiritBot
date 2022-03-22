@@ -4,11 +4,17 @@
 
 package frc.robot.commands;
 
+
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.RobotContainer;
 
 public class horn extends CommandBase {
-  /** Creates a new horn. */
+  private Relay.Value KF;
+  private Relay.Value KOFF;
+  /** Creates a new Horn. */
   public horn() {
+    addRequirements(RobotContainer.m_Horn);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -18,7 +24,14 @@ public class horn extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    KF = Relay.Value.kForward;
+    if (RobotContainer.m_FireValve.getRelay() == KF) {
+      RobotContainer.m_FireValve.setValve(false);
+    } else if (RobotContainer.m_FireValve.getRelay() == KOFF) {
+      RobotContainer.m_FireValve.setValve(true);
+    }
+  }
 
   // Called once the command ends or is interrupted.
   @Override

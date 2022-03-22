@@ -6,16 +6,25 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.simulation.JoystickSim;
 import frc.robot.commands.Drive;
+import frc.robot.commands.FireCannon;
+import frc.robot.commands.changeDriveMode;
+import frc.robot.commands.fillToPSI;
+import frc.robot.commands.setCannon;
+import frc.robot.commands.horn;
 import frc.robot.subsystems.Cannon;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.FillTankValve;
 import frc.robot.subsystems.FireValve;
 import frc.robot.subsystems.Horn;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -31,7 +40,7 @@ public class RobotContainer {
   public final static Horn m_Horn = new Horn();
   public final static FillTankValve m_FillTankValve = new FillTankValve();
 
-  public final Drive m_TankDrive = new Drive();
+  public final Drive m_Drive = new Drive();
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
@@ -46,7 +55,16 @@ public class RobotContainer {
       return XboxC.getRawAxis(axis);
     }
   }
-  
+
+  public boolean getRT() {
+    
+    return (XboxC.getRawAxis(3) > .5);
+  }
+
+  public boolean getLT() {
+    return (XboxC.getRawAxis(2) > .5);
+  }
+
   //Controller buttons
   public static JoystickButton AB = new JoystickButton(XboxC, 1);
   public static JoystickButton BB = new JoystickButton(XboxC, 2);
@@ -54,8 +72,8 @@ public class RobotContainer {
   public static JoystickButton YB = new JoystickButton(XboxC, 4);
   public static JoystickButton LB = new JoystickButton(XboxC, 5);
   public static JoystickButton RB = new JoystickButton(XboxC, 6);
-  public static JoystickButton HB = new JoystickButton(XboxC, 7);
-  public static JoystickButton ZB = new JoystickButton(XboxC, 8);
+  public static JoystickButton VB = new JoystickButton(XboxC, 7);
+  public static JoystickButton MB = new JoystickButton(XboxC, 8);
   public static JoystickButton LJB = new JoystickButton(XboxC, 9);
   public static JoystickButton RJB = new JoystickButton(XboxC, 10);
   //Dpad
@@ -70,7 +88,22 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {}
+  private void configureButtonBindings() {
+    VB.whenReleased(new changeDriveMode());//change drive mode
+
+    up.whileActiveContinuous(new setCannon(0.01));// cannon up
+    down.whileActiveContinuous(new setCannon(-0.01));// cannon down
+
+    YB.whenReleased(new fillToPSI(90));//long fill set
+    BB.whenReleased(new fillToPSI(60));//mid fill set
+    AB.whenReleased(new fillToPSI(30));// short set
+
+    RB.whenReleased(new SequentialCommandGroup(new horn(), new WaitCommand(0.5), new FireCannon()));//horn --> Fire
+    
+    LB.whenReleased(new horn());//Horn
+
+    
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
@@ -79,6 +112,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_TankDrive;
+    return m_Drive;
   }
 }

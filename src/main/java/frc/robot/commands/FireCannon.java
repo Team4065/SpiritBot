@@ -19,7 +19,11 @@ public class FireCannon extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
+  public void initialize() {}
+  
+  // Called every time the scheduler runs while the command is scheduled.
+  @Override
+  public void execute() {
     KF = Relay.Value.kForward;
     if (RobotContainer.m_FireValve.getRelay() == KF) {
       RobotContainer.m_FireValve.setValve(false);
@@ -27,11 +31,7 @@ public class FireCannon extends CommandBase {
       RobotContainer.m_FireValve.setValve(true);
     }
   }
-
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {}
-
+  
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {}
