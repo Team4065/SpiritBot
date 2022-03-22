@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Horn extends SubsystemBase {
-  private Relay HornCompressor = new Relay(Constants.m_FillValve);
+  private Relay HornCompressor = new Relay(Constants.m_HornCompressor);
   /** Creates a new Horn. */
   public Horn() {}
 
@@ -18,8 +18,8 @@ public class Horn extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public Relay.Value getRelay() {
-    return HornCompressor.get();
+  public boolean getRelay() {
+    return (HornCompressor.get() == Relay.Value.kForward);
   }
 
   public void setValve(boolean trigger) {

@@ -14,14 +14,14 @@ public class DriveTrain extends SubsystemBase {
   public int driveMode = Constants.m_drivemode;
   /** Creates a new DriveTrain. */
   public DriveTrain() {
-    //left.setInverted(Constants.m_LeftSideInvert);
-    //right.setInverted(Constants.m_LeftSideInvert);
+    left.setInverted(Constants.m_LeftSideInvert);
+    right.setInverted(Constants.m_RightSideInvert);
   }
   // Creates Motorcontroller
   //Right
   private final Spark right = new Spark(Constants.m_RightMotor);
   //left
-  private final Spark left = new Spark(1);
+  private final Spark left = new Spark(Constants.m_LeftMotor);
   DifferentialDrive drive = new DifferentialDrive(left, right);
   @Override
   public void periodic() {

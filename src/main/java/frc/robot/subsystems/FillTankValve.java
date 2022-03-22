@@ -23,8 +23,8 @@ public class FillTankValve extends SubsystemBase {
     return psi.get();
   }
 
-  public Relay.Value getRelay() {
-    return FillVal.get();
+  public boolean getRelay() {
+    return (FillVal.get() == Relay.Value.kForward);
   }
 
   public void setValve(boolean trigger) {

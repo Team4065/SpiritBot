@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class FireValve extends SubsystemBase {
-  private Relay FireVal = new Relay(Constants.m_FillValve);
+  private Relay FireVal = new Relay(Constants.m_FireValve);
   /** Creates a new FireValve. */
   public FireValve() {}
 
@@ -18,8 +18,8 @@ public class FireValve extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public Relay.Value getRelay() {
-    return FireVal.get();
+  public boolean getRelay() {
+    return (FireVal.get() == Relay.Value.kForward);
   }
 
   public void setValve(boolean trigger) {

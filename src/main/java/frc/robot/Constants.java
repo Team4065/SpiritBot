@@ -17,6 +17,12 @@ public final class Constants {
     public static final int m_LeftMotor = 0;
     public static final int m_RightMotor = 1;
     public static final int m_TiltMotor = 2;
+    //RoboRio Relay
+    public static final int m_FillValve = 0;
+    public static final int m_FireValve = 1;
+    public static final int m_HornCompressor = 2;
+    //RoboRio Analog in
+    public static final int m_PSIGuage = 1;
     //Motor Inverts
     public static final boolean m_LeftSideInvert = true;
     public static final boolean m_RightSideInvert = false;
@@ -24,6 +30,5 @@ public final class Constants {
     public static final int JOYSTICK_PORT = 0;
     //presets
     public static final int m_drivemode = 1;//Drive Modes 1 = Tank 2 = Arcade 3 = Curvature
-    public static final int m_FillValve = 0;
-    public static final int m_PSIGuage = 0;
+    public static final double m_TriggerPoint = 0.5;
 }

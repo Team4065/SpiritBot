@@ -4,13 +4,11 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.RobotContainer;
 
 public class FireCannon extends CommandBase {
-  private Relay.Value KF;
-  private Relay.Value KOFF;
   /** Creates a new FireCannon. */
   public FireCannon() {
     addRequirements(RobotContainer.m_FireValve);
@@ -19,17 +17,16 @@ public class FireCannon extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    RobotContainer.m_FireValve.setValve(false);
+    new WaitCommand(.5);
+    RobotContainer.m_FireValve.setValve(true);
+  }
   
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    KF = Relay.Value.kForward;
-    if (RobotContainer.m_FireValve.getRelay() == KF) {
-      RobotContainer.m_FireValve.setValve(false);
-    } else if (RobotContainer.m_FireValve.getRelay() == KOFF) {
-      RobotContainer.m_FireValve.setValve(true);
-    }
+
   }
   
   // Called once the command ends or is interrupted.

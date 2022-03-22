@@ -6,7 +6,6 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.simulation.JoystickSim;
 import frc.robot.commands.Drive;
 import frc.robot.commands.FireCannon;
 import frc.robot.commands.changeDriveMode;
@@ -24,7 +23,6 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -57,12 +55,11 @@ public class RobotContainer {
   }
 
   public boolean getRT() {
-    
-    return (XboxC.getRawAxis(3) > .5);
+    return (XboxC.getRawAxis(3) > Constants.m_TriggerPoint);
   }
 
   public boolean getLT() {
-    return (XboxC.getRawAxis(2) > .5);
+    return (XboxC.getRawAxis(2) > Constants.m_TriggerPoint);
   }
 
   //Controller buttons
@@ -98,11 +95,16 @@ public class RobotContainer {
     BB.whenReleased(new fillToPSI(60));//mid fill set
     AB.whenReleased(new fillToPSI(30));// short set
 
-    RB.whenReleased(new SequentialCommandGroup(new horn(), new WaitCommand(0.5), new FireCannon()));//horn --> Fire
+    RB.whenReleased(new SequentialCommandGroup(
+      new horn(), new WaitCommand(.5), new horn(), new WaitCommand(0.1), new FireCannon())//horn --> Fire
+      );
     
+    LB.whenPressed(new horn());//Horn
     LB.whenReleased(new horn());//Horn
 
-    
+    if (getLT() || getRT()) {
+      new FireCannon();
+    }
   }
 
   /**
