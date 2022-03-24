@@ -54,12 +54,24 @@ public class RobotContainer {
     }
   }
 
+  public static double getDeadZoneWithRamp (int axis){
+    if (Math.abs(XboxC.getRawAxis(axis)) < 0.1) {
+      return 0.0;
+    } else {
+      return Math.pow(XboxC.getRawAxis(axis), Constants.m_RamingExponet);
+    }
+  }
+
   public boolean getRT() {
     return (XboxC.getRawAxis(3) > Constants.m_TriggerPoint);
   }
 
   public boolean getLT() {
     return (XboxC.getRawAxis(2) > Constants.m_TriggerPoint);
+  }
+
+  public double getAxisRamped(int axis) {
+    return Math.pow(XboxC.getRawAxis(axis), Constants.m_RamingExponet);
   }
 
   //Controller buttons
