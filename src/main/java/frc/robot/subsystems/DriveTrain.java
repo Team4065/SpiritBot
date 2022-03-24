@@ -48,11 +48,11 @@ public class DriveTrain extends SubsystemBase {
 
   public void setDrive(int driveMode) {
     if (driveMode == 1) {
-      drive.tankDrive(RobotContainer.getDeadZone(1), RobotContainer.getDeadZone(5));
+      drive.tankDrive(RobotContainer.getDeadZoneWithRamp(1), RobotContainer.getDeadZoneWithRamp(5));
     } else if (driveMode == 2) {
-      drive.arcadeDrive(RobotContainer.getDeadZone(1), RobotContainer.getDeadZone(4));
+      drive.arcadeDrive(RobotContainer.getDeadZoneWithRamp(1), RobotContainer.getDeadZoneWithRamp(4));
     } else if (driveMode == 3) {
-      drive.curvatureDrive(RobotContainer.getDeadZone(1), RobotContainer.getDeadZone(4), false);
+      drive.curvatureDrive(RobotContainer.getDeadZoneWithRamp(1), RobotContainer.getDeadZoneWithRamp(4), false);
     } else {
       System.out.println("Error: Not a Drive Mode\n1 = Tank\n2 = Arcade\n3 = Curvature");
     }
