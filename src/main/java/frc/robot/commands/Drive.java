@@ -5,10 +5,11 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveTrain;
 
 public class Drive extends CommandBase {
-  private DriveTrain driveTrain = new DriveTrain();
+  private DriveTrain driveTrain = RobotContainer.m_DriveTrain;
   /** Creates a new TankDrive. */
   public Drive() {
     // Use addRequirements() here to declare subsystem dependencies.

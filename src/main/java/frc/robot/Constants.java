@@ -32,4 +32,5 @@ public final class Constants {
     public static final int m_drivemode = 1;//Drive Modes 1 = Tank 2 = Arcade 3 = Curvature
     public static final double m_TriggerPoint = 0.5;
     public static final double m_RamingExponet = 2.04;
+    public static final double m_CannonStopPoint = 70;
 }
