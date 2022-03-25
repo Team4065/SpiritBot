@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.RobotContainer;
 
 public class FireCannon extends CommandBase {
+  boolean done = false;
   /** Creates a new FireCannon. */
   public FireCannon() {
     addRequirements(RobotContainer.m_FireValve);
@@ -21,6 +22,7 @@ public class FireCannon extends CommandBase {
     RobotContainer.m_FireValve.setValve(false);
     new WaitCommand(.5);
     RobotContainer.m_FireValve.setValve(true);
+    done = true;
   }
   
   // Called every time the scheduler runs while the command is scheduled.
@@ -31,11 +33,13 @@ public class FireCannon extends CommandBase {
   
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    RobotContainer.m_FireValve.setValve(false);
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return done;
   }
 }

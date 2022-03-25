@@ -14,36 +14,34 @@ public class DriveTrain extends SubsystemBase {
   public int driveMode = Constants.m_drivemode;
   /** Creates a new DriveTrain. */
   public DriveTrain() {
-    left.setInverted(Constants.m_LeftSideInvert);
-    right.setInverted(Constants.m_RightSideInvert);
+    LM.setInverted(Constants.m_LeftSideInvert);
+    RM.setInverted(Constants.m_RightSideInvert);
   }
   // Creates Motorcontroller
   //Right
-  private final Spark right = new Spark(Constants.m_RightMotor);
+  private final Spark RM = new Spark(Constants.m_RightMotor);
   //left
-  private final Spark left = new Spark(Constants.m_LeftMotor);
-  DifferentialDrive drive = new DifferentialDrive(left, right);
+  private final Spark LM = new Spark(Constants.m_LeftMotor);
+  DifferentialDrive drive = new DifferentialDrive(LM, RM);
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
   }
   //Setting Commands
   public void setForward(double speed) {
-    left.set(speed);
-    right.set(speed);
+    drive.tankDrive(speed, speed);
   }
 
   public void setTurn(double speed) {
-    left.set(speed);
-    right.set(-speed);
+    drive.tankDrive(speed, -speed);
   }
 
   public void setLeft(double speed) {
-    left.set(speed);
+    drive.tankDrive(speed, 0);
   }
 
   public void setRight(double speed) {
-    right.set(speed);
+    drive.tankDrive(0, speed);
   }
 
   public void setDrive(int driveMode) {

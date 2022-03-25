@@ -33,4 +33,5 @@ public final class Constants {
     public static final double m_TriggerPoint = 0.5;
     public static final double m_RamingExponet = 2.04;
     public static final double m_CannonStopPoint = 70;
+    public static final double m_hornlenght = 0.5;
 }

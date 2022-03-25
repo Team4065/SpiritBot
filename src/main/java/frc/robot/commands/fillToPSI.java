@@ -10,6 +10,7 @@ import frc.robot.RobotContainer;
 public class fillToPSI extends CommandBase {
 
   private double psi;
+  private boolean done = false;
   /** Creates a new fillToPSI. */
   public fillToPSI(double PSI) {
     psi = PSI;
@@ -20,7 +21,9 @@ public class fillToPSI extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    done = false;
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -29,17 +32,19 @@ public class fillToPSI extends CommandBase {
       RobotContainer.m_FillTankValve.setValve(true);
     } else if (psi <= RobotContainer.m_FillTankValve.getPSI()) {
       RobotContainer.m_FillTankValve.setValve(false);
-      end(false);
+      done = true;
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    RobotContainer.m_FillTankValve.setValve(false);
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return done;
   }
 }

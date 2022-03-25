@@ -17,7 +17,6 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.FillTankValve;
 import frc.robot.subsystems.FireValve;
 import frc.robot.subsystems.Horn;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj.Joystick;
@@ -38,7 +37,7 @@ public class RobotContainer {
   public final static Horn m_Horn = new Horn();
   public final static FillTankValve m_FillTankValve = new FillTankValve();
 
-  public final Drive m_Drive = new Drive();
+  public final static Drive m_Drive = new Drive();
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
@@ -108,7 +107,7 @@ public class RobotContainer {
     AB.whenReleased(new fillToPSI(30));// short set
 
     RB.whenReleased(new SequentialCommandGroup(
-      new horn(), new WaitCommand(.5), new horn(), new WaitCommand(0.1), new FireCannon())//horn --> Fire
+      new horn(), new WaitCommand(Constants.m_hornlenght), new horn(), new WaitCommand(0.1), new FireCannon())//horn --> Fire
       );
     
     LB.whenPressed(new horn());//Horn
@@ -117,15 +116,5 @@ public class RobotContainer {
     if (getLT() || getRT()) {
       new FireCannon();
     }
-  }
-
-  /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
-   */
-  public Command getAutonomousCommand() {
-    // An ExampleCommand will run in autonomous
-    return m_Drive;
   }
 }
