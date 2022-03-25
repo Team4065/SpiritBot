@@ -21,21 +21,21 @@ public class Cannon extends SubsystemBase {
   private DigitalInput StopPoint = new DigitalInput(0);
   private AnalogPotentiometer potentiometer = new AnalogPotentiometer(0, 360, 0);
 
-  private double kp = 0.1, ki = 0.01, kd = 0.001;
-  public PIDController pid = new PIDController(kp, ki, kd);
+  //private double kp = 0.1, ki = 0.01, kd = 0.001;
+  //public PIDController pid = new PIDController(kp, ki, kd);
   @Override
   public void periodic() {
-    if (potentiometer.get() < Constants.m_CannonStopPoint) {
+    /*if (potentiometer.get() < Constants.m_CannonStopPoint) {
       TiltMotor.set(pid.calculate(potentiometer.get(), Target));
     } else {
       TiltMotor.set(0);
-    }
+    }*/
     // This method will be called once per scheduler run
   }
   
-  public void setAngle(double target) {
+  /*public void setAngle(double target) {
     Target = target;
-  }
+  }*/
 
   public void setTilt(double speed) {
     if (potentiometer.get() < Constants.m_CannonStopPoint) {
