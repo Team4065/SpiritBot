@@ -20,7 +20,7 @@ public class FireCannon extends CommandBase {
   @Override
   public void initialize() {
     RobotContainer.m_FireValve.setValve(false);
-    new WaitCommand(.5);
+    new WaitCommand(.2);
     RobotContainer.m_FireValve.setValve(true);
     done = true;
   }

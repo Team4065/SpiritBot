@@ -8,6 +8,7 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.motorcontrol.Talon;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -31,6 +32,8 @@ public class Cannon extends SubsystemBase {
       TiltMotor.set(0);
     }*/
     // This method will be called once per scheduler run
+    SmartDashboard.putNumber("Cannon Angle", potentiometer.get());
+    SmartDashboard.putBoolean("Cannon Bottom Limit", StopPoint.get());
   }
   
   /*public void setAngle(double target) {
@@ -38,16 +41,17 @@ public class Cannon extends SubsystemBase {
   }*/
 
   public void setTilt(double speed) {
-    if (potentiometer.get() < Constants.m_CannonStopPoint) {
+    TiltMotor.set(speed);
+    if (/*(potentiometer.get() < Constants.m_CannonStopPoint && speed < 0) && */ (getStopPoint() && speed < 0)) {
       TiltMotor.set(speed);
     } else {
       TiltMotor.set(0);
     }
   }
 
-  public double getAngle() {
+  /*public double getAngle() {
     return potentiometer.get();
-  }
+  }*/
 
   public boolean getStopPoint() {
     return StopPoint.get();

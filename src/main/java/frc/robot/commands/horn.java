@@ -10,8 +10,10 @@ import frc.robot.RobotContainer;
 
 public class horn extends CommandBase {
   private boolean done = false;
+  private boolean On;
   /** Creates a new Horn. */
-  public horn() {
+  public horn(boolean on) {
+    On = on;
     addRequirements(RobotContainer.m_Horn);
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -20,11 +22,7 @@ public class horn extends CommandBase {
   @Override
   public void initialize() {
     done = false;
-    if (RobotContainer.m_FireValve.getRelay()) {
-      RobotContainer.m_FireValve.setValve(false);
-    } else{
-      RobotContainer.m_FireValve.setValve(true);
-    }
+    RobotContainer.m_FireValve.setValve(On);
     done = true;
   }
 

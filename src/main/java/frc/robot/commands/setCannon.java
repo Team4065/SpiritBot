@@ -20,14 +20,10 @@ public class setCannon extends CommandBase {
   @Override
   public void initialize() {}
 
-  // Called every time the scheduler runs while the command is scheduled.
+  // Called every time the scheduler runs while the command is scheduled. 
   @Override
   public void execute() {
-    if (RobotContainer.M_Cannon.getStopPoint()) {
-      RobotContainer.M_Cannon.setTilt(0);
-    } else {
-      RobotContainer.M_Cannon.setTilt(speed);
-    }
+    RobotContainer.M_Cannon.setTilt(speed);
   }
 
   // Called once the command ends or is interrupted.

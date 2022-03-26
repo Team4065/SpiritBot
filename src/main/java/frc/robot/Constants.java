@@ -24,8 +24,8 @@ public final class Constants {
     //RoboRio Analog in
     public static final int m_PSIGuage = 1;
     //Motor Inverts
-    public static final boolean m_LeftSideInvert = true;
-    public static final boolean m_RightSideInvert = false;
+    public static final boolean m_LeftSideInvert = false;
+    public static final boolean m_RightSideInvert = true;
     //Contorller Port
     public static final int JOYSTICK_PORT = 0;
     //presets
@@ -34,4 +34,5 @@ public final class Constants {
     public static final double m_RamingExponet = 2.04;
     public static final double m_CannonStopPoint = 70;
     public static final double m_hornlenght = 0.5;
+    public static final double m_Deadzone = 0;
 }

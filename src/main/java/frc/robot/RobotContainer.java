@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.Drive;
+import frc.robot.commands.FillVAlveToggle;
 import frc.robot.commands.FireCannon;
 import frc.robot.commands.changeDriveMode;
 import frc.robot.commands.fillToPSI;
@@ -46,15 +47,19 @@ public class RobotContainer {
   public static Joystick XboxC = new Joystick(Constants.JOYSTICK_PORT);
 
   public static double getDeadZone (int axis){
-    if (Math.abs(XboxC.getRawAxis(axis)) < 0.1) {
+    if (Math.abs(XboxC.getRawAxis(axis)) < Constants.m_Deadzone) {
       return 0.0;
     } else {
       return XboxC.getRawAxis(axis);
     }
   }
 
+  public static double getRawAxis (int axis){
+    return XboxC.getRawAxis(axis);
+  }
+
   public static double getDeadZoneWithRamp (int axis){
-    if (Math.abs(XboxC.getRawAxis(axis)) < 0.1) {
+    if (Math.abs(XboxC.getRawAxis(axis)) < Constants.m_Deadzone) {
       return 0.0;
     } else {
       return Math.pow(XboxC.getRawAxis(axis), Constants.m_RamingExponet);
@@ -106,12 +111,15 @@ public class RobotContainer {
     BB.whenReleased(new fillToPSI(60));//mid fill set
     AB.whenReleased(new fillToPSI(30));// short set
 
+    XB.whenPressed(new FillVAlveToggle(true));//Manual on
+    XB.whenReleased(new FillVAlveToggle(false));//Manual off
+
     RB.whenReleased(new SequentialCommandGroup(
-      new horn(), new WaitCommand(Constants.m_hornlenght), new horn(), new WaitCommand(0.1), new FireCannon())//horn --> Fire
+      new horn(true), new WaitCommand(Constants.m_hornlenght), new horn(false), new WaitCommand(0.1), new FireCannon())//horn --> Fire
       );
     
-    LB.whenPressed(new horn());//Horn
-    LB.whenReleased(new horn());//Horn
+    LB.whenPressed(new horn(true));//Horn on
+    LB.whenReleased(new horn(false));//Horn off
 
     if (getLT() || getRT()) {
       new FireCannon();

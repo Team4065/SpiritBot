@@ -17,6 +17,7 @@ public class DriveTrain extends SubsystemBase {
     LM.setInverted(Constants.m_LeftSideInvert);
     RM.setInverted(Constants.m_RightSideInvert);
   }
+  
   // Creates Motorcontroller
   //Right
   private final Spark RM = new Spark(Constants.m_RightMotor);
@@ -25,6 +26,7 @@ public class DriveTrain extends SubsystemBase {
   DifferentialDrive drive = new DifferentialDrive(LM, RM);
   @Override
   public void periodic() {
+    //System.out.println(driveMode);
     // This method will be called once per scheduler run
   }
   //Setting Commands
