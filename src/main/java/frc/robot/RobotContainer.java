@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import frc.robot.commands.Drive;
 import frc.robot.commands.FillVAlveToggle;
 import frc.robot.commands.FireCannon;
@@ -132,6 +133,11 @@ public class RobotContainer {
       new FireCannon(true);
     } else {
       new FireCannon(false);
+    }
+
+    if (m_FillTankValve.getRelay()){
+      XboxC.setRumble(RumbleType.kLeftRumble, 1);
+      XboxC.setRumble(RumbleType.kRightRumble, 1);
     }
   }
 }
