@@ -5,12 +5,14 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Relay;
+import edu.wpi.first.wpilibj.Relay.Direction;
+import edu.wpi.first.wpilibj.Relay.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class FireValve extends SubsystemBase {
-  private Relay FireVal = new Relay(Constants.m_FireValve);
+  private Relay FireVal = new Relay(Constants.m_FireValve, Direction.kForward);
   /** Creates a new FireValve. */
   public FireValve() {}
 
@@ -18,6 +20,7 @@ public class FireValve extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     SmartDashboard.putBoolean("Fire Valve", getRelay());
+
   }
 
   public boolean getRelay() {
@@ -26,9 +29,9 @@ public class FireValve extends SubsystemBase {
 
   public void setValve(boolean trigger) {
     if (trigger) {
-      FireVal.set(Relay.Value.kForward);;
+      FireVal.set(Value.kForward);
     } else {
-      FireVal.set(Relay.Value.kOff);
+      FireVal.set(Value.kOff);
     }
   }
 }

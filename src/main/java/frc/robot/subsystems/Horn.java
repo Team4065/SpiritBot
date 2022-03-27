@@ -5,12 +5,14 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Relay;
+import edu.wpi.first.wpilibj.Relay.Direction;
+import edu.wpi.first.wpilibj.Relay.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Horn extends SubsystemBase {
-  private Relay HornCompressor = new Relay(Constants.m_HornCompressor);
+  private Relay HornCompressor = new Relay(Constants.m_HornCompressor, Direction.kForward);
   /** Creates a new Horn. */
   public Horn() {}
 
@@ -26,9 +28,9 @@ public class Horn extends SubsystemBase {
 
   public void setValve(boolean trigger) {
     if (trigger) {
-      HornCompressor.set(Relay.Value.kForward);;
+      HornCompressor.set(Value.kForward);;
     } else {
-      HornCompressor.set(Relay.Value.kOff);
+      HornCompressor.set(Value.kOff);
     }
   }
 }

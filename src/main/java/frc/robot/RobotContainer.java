@@ -67,11 +67,13 @@ public class RobotContainer {
   }
 
   public boolean getRT() {
-    return (XboxC.getRawAxis(3) > Constants.m_TriggerPoint);
+    boolean triggerd = (XboxC.getRawAxis(3) > Constants.m_TriggerPoint);
+    return triggerd;
   }
 
   public boolean getLT() {
-    return (XboxC.getRawAxis(2) > Constants.m_TriggerPoint);
+    boolean triggerd = (XboxC.getRawAxis(2) > Constants.m_TriggerPoint);
+    return triggerd;
   }
 
   public double getAxisRamped(int axis) {
@@ -104,25 +106,32 @@ public class RobotContainer {
   private void configureButtonBindings() {
     VB.whenReleased(new changeDriveMode());//change drive mode
 
-    up.whileActiveContinuous(new setCannon(0.01));// cannon up
-    down.whileActiveContinuous(new setCannon(-0.01));// cannon down
+    up.whenPressed(new setCannon(0.1));// cannon up
+    up.whenReleased(new setCannon(0));// cannon up
+    down.whenPressed(new setCannon(-0.1));// cannon down
+    down.whenReleased(new setCannon(0));// cannon down
 
-    YB.whenReleased(new fillToPSI(90));//long fill set
-    BB.whenReleased(new fillToPSI(60));//mid fill set
-    AB.whenReleased(new fillToPSI(30));// short set
+    YB.whenPressed(new fillToPSI(90));//long fill set
+    BB.whenPressed(new fillToPSI(60));//mid fill set
+    AB.whenPressed(new fillToPSI(30));// short set
+
+    /*YB.whenPressed(new horn(true));
+    YB.whenReleased(new horn(false));
+    BB.whenPressed(new FireCannon(true));
+    BB.whenReleased(new FireCannon(false));*/
 
     XB.whenPressed(new FillVAlveToggle(true));//Manual on
     XB.whenReleased(new FillVAlveToggle(false));//Manual off
 
-    RB.whenReleased(new SequentialCommandGroup(
-      new horn(true), new WaitCommand(Constants.m_hornlenght), new horn(false), new WaitCommand(0.1), new FireCannon())//horn --> Fire
-      );
+    RB.whenReleased(new SequentialCommandGroup(new horn(true), new WaitCommand(Constants.m_hornlenght), new horn(false), new WaitCommand(0.1), new FireCannon(true), new WaitCommand(0.1), new FireCannon(false)));//horn --> Fire
     
     LB.whenPressed(new horn(true));//Horn on
     LB.whenReleased(new horn(false));//Horn off
 
     if (getLT() || getRT()) {
-      new FireCannon();
+      new FireCannon(true);
+    } else {
+      new FireCannon(false);
     }
   }
 }

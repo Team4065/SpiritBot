@@ -42,9 +42,9 @@ public class Cannon extends SubsystemBase {
   public void setTilt(double speed) {
     TiltMotor.set(speed);
     if (/*(potentiometer.get() < Constants.m_CannonStopPoint && speed < 0) && */ (getStopPoint() && speed < 0)) {
-      TiltMotor.set(speed);
-    } else {
       TiltMotor.set(0);
+    } else {
+      TiltMotor.set(speed);
     }
   }
 

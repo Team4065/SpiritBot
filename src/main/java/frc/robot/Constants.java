@@ -30,9 +30,12 @@ public final class Constants {
     public static final int JOYSTICK_PORT = 0;
     //presets
     public static final int m_drivemode = 1;//Drive Modes 1 = Tank 2 = Arcade 3 = Curvature
-    public static final double m_TriggerPoint = 0.5;
-    public static final double m_RamingExponet = 2.04;
+    public static final double m_TriggerPoint = 0.75;
+    public static final double m_RamingExponet = 9;
     public static final double m_CannonStopPoint = 70;
     public static final double m_hornlenght = 0.5;
-    public static final double m_Deadzone = 0;
+    public static final double m_Deadzone = 0.05;
+    public static final double m_FillValveTimeout = 6;
+    public static final double m_HornTimeout = 3;
+    public static final double m_FirerValveTimeout = 5;
 }

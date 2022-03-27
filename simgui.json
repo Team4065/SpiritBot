@@ -23,6 +23,9 @@
     "RoboRIO": {
       "6V Rail": {
         "open": true
+      },
+      "window": {
+        "visible": true
       }
     }
   },
@@ -42,14 +45,14 @@
     }
   },
   "NetworkTables": {
-    "FMSInfo": {
-      "open": true
-    },
     "LiveWindow": {
       ".status": {
         "open": true
       },
       "Cannon": {
+        "open": true
+      },
+      "FireValve": {
         "open": true
       },
       "open": true

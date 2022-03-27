@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.Relay;
+import edu.wpi.first.wpilibj.Relay.Direction;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -13,8 +14,8 @@ import frc.robot.Constants;
 public class FillTankValve extends SubsystemBase {
   /** Creates a new FillTankValve. */
   public FillTankValve() {}
-  private Relay FillVal = new Relay(Constants.m_FillValve , Relay.Direction.kForward);
-  private AnalogPotentiometer psi = new AnalogPotentiometer(Constants.m_PSIGuage, 250, 25);
+  private Relay FillVal = new Relay(Constants.m_FillValve , Direction.kForward);
+  private AnalogPotentiometer psi = new AnalogPotentiometer(Constants.m_PSIGuage, 250, 0);
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

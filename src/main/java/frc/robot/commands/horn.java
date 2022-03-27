@@ -5,11 +5,14 @@
 package frc.robot.commands;
 
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
 public class horn extends CommandBase {
-  private boolean done = false;
+  private Timer timer = new Timer();
+  private double TimeoutDuration = Constants.m_HornTimeout;
   private boolean On;
   /** Creates a new Horn. */
   public horn(boolean on) {
@@ -21,9 +24,9 @@ public class horn extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    done = false;
-    RobotContainer.m_FireValve.setValve(On);
-    done = true;
+    RobotContainer.m_Horn.setValve(On);
+    timer.reset();
+    timer.start();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -33,12 +36,13 @@ public class horn extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.m_FireValve.setValve(false);
+    RobotContainer.m_Horn.setValve(false);
+    //timer.stop();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return done;
+    return timer.hasElapsed(TimeoutDuration);
   }
 }
