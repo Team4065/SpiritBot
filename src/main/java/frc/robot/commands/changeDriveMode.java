@@ -9,6 +9,7 @@ import frc.robot.RobotContainer;
 
 public class changeDriveMode extends CommandBase {
   private int DM;
+  private boolean fin;
   /** Creates a new changeDriveMode. */
   public changeDriveMode() {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -25,6 +26,7 @@ public class changeDriveMode extends CommandBase {
     } else if (DM == 3) {
       RobotContainer.m_DriveTrain.driveMode = 1;
     }
+    fin = true;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -38,6 +40,6 @@ public class changeDriveMode extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return fin;
   }
 }

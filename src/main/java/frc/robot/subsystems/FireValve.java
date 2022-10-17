@@ -24,7 +24,7 @@ public class FireValve extends SubsystemBase {
   }
 
   public boolean getRelay() {
-    return (FireVal.get() == Relay.Value.kForward);
+    return (FireVal.get() == Relay.Value.kOn);
   }
 
   public void setValve(boolean trigger) {

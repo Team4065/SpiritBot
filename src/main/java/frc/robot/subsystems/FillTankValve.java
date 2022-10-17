@@ -6,10 +6,12 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.Relay;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Relay.Direction;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 
 public class FillTankValve extends SubsystemBase {
   /** Creates a new FillTankValve. */
@@ -21,6 +23,12 @@ public class FillTankValve extends SubsystemBase {
     // This method will be called once per scheduler run
     SmartDashboard.putBoolean("Fill Valve", getRelay());
     SmartDashboard.putNumber("PSI", psi.get());
+
+    if (getRelay()){
+      RobotContainer.XboxC.setRumble(RumbleType.kLeftRumble, 1);
+    }else{
+      RobotContainer.XboxC.setRumble(RumbleType.kLeftRumble, 0);
+    }
   }
 
   public double getPSI() {
@@ -28,7 +36,7 @@ public class FillTankValve extends SubsystemBase {
   }
 
   public boolean getRelay() {
-    return (FillVal.get() == Relay.Value.kForward);
+    return (FillVal.get() == Relay.Value.kOn);
   }
 
   public void setValve(boolean trigger) {

@@ -4,43 +4,38 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
-public class FillVAlveToggle extends CommandBase {
-  private double TimeoutDuration = Constants.m_FillValveTimeout;
-  private Timer timer = new Timer();
-  private boolean On;
-  /** Creates a new FillVAlveToggle. */
-  public FillVAlveToggle(boolean on) {
-    On = on;
+public class CannonToZero extends CommandBase {
+  private boolean fin = false;
+  /** Creates a new CannonToZero. */
+  public CannonToZero() {
+    addRequirements(RobotContainer.M_Cannon);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    RobotContainer.m_FillTankValve.setValve(On);
-    timer.start();
-    timer.reset();
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    while (RobotContainer.M_Cannon.getStopPoint()) {
+      RobotContainer.M_Cannon.setTilt(-1);
+    }
+    RobotContainer.M_Cannon.setTilt(0);
+    fin = true;
+  }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    RobotContainer.m_FillTankValve.setValve(false);
-    timer.stop();
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return timer.hasElapsed(TimeoutDuration);
+    return fin;
   }
 }

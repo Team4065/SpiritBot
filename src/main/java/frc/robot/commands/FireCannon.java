@@ -5,17 +5,17 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.TriggerButtons;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
 public class FireCannon extends CommandBase {
-  private double TimeoutDuration = Constants.m_FirerValveTimeout;
-  private Timer timer = new Timer();
-  private boolean On;
+  private boolean fin = false;
+  private Timer time;
   /** Creates a new FireCannon. */
-  public FireCannon(boolean on) {
-    On = on;
+  public FireCannon() {
     addRequirements(RobotContainer.m_FireValve);
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -23,15 +23,21 @@ public class FireCannon extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.m_FireValve.setValve(On);
-    timer.reset();
-    timer.start();
+    time = new Timer();
+    time.reset();
+    time.start();
   }
   
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    RobotContainer.m_FireValve.setValve(true);
+    System.out.println("on");
+    Timer.delay(1);
+    System.out.println("off");
+    time.stop();
     RobotContainer.m_FireValve.setValve(false);
+    fin = true;
   }
   
   // Called once the command ends or is interrupted.
@@ -41,6 +47,6 @@ public class FireCannon extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return timer.hasElapsed(TimeoutDuration);
+    return fin;
   }
 }

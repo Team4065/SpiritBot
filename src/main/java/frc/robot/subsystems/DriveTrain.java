@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
@@ -26,6 +27,7 @@ public class DriveTrain extends SubsystemBase {
   DifferentialDrive drive = new DifferentialDrive(LM, RM);
   @Override
   public void periodic() {
+    SmartDashboard.putNumber("DriveMode", driveMode);
     //System.out.println(driveMode);
     // This method will be called once per scheduler run
   }

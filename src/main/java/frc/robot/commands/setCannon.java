@@ -9,6 +9,7 @@ import frc.robot.RobotContainer;
 
 public class setCannon extends CommandBase {
   private double speed;
+  private boolean fin = false;
   /** Creates a new setCannon. */
   public setCannon(double Speed) {
     speed = Speed;
@@ -18,21 +19,25 @@ public class setCannon extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    RobotContainer.M_Cannon.setTilt(speed);
+    fin = true;
+  }
 
   // Called every time the scheduler runs while the command is scheduled. 
   @Override
   public void execute() {
-    RobotContainer.M_Cannon.setTilt(speed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    RobotContainer.M_Cannon.setTilt(0);
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return fin;
   }
 }

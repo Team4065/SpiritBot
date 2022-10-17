@@ -7,9 +7,12 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.TriggerButtons;
+import frc.robot.commands.CannonToZero;
 import frc.robot.commands.Drive;
-import frc.robot.commands.FillVAlveToggle;
 import frc.robot.commands.FireCannon;
+import frc.robot.commands.ManuelFill;
 import frc.robot.commands.changeDriveMode;
 import frc.robot.commands.fillToPSI;
 import frc.robot.commands.setCannon;
@@ -24,6 +27,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -73,7 +77,7 @@ public class RobotContainer {
   }
 
   public boolean getLT() {
-    boolean triggerd = (XboxC.getRawAxis(2) > Constants.m_TriggerPoint);
+    boolean triggerd = (XboxC.getRawAxis(2) < Constants.m_TriggerPoint);
     return triggerd;
   }
 
@@ -98,6 +102,9 @@ public class RobotContainer {
   public static POVButton down = new POVButton(XboxC, 180);
   public static POVButton left = new POVButton(XboxC, 270);
 
+  public static TriggerButtons leftTrig = new TriggerButtons(XboxC, 2, .1);
+  public static TriggerButtons RightTrig = new TriggerButtons(XboxC, 3, .1);
+
   /**
    * Use this method to define your button->command mappings. Buttons can be created by
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
@@ -107,37 +114,24 @@ public class RobotContainer {
   private void configureButtonBindings() {
     VB.whenReleased(new changeDriveMode());//change drive mode
 
-    up.whenPressed(new setCannon(0.1));// cannon up
-    up.whenReleased(new setCannon(0));// cannon up
-    down.whenPressed(new setCannon(-0.1));// cannon down
-    down.whenReleased(new setCannon(0));// cannon down
+    up.whenPressed(new setCannon(0.5));//cannon up
+    up.whenReleased(new setCannon(0));//cannon up
+    down.whenPressed(new setCannon(-0.5));//cannon down
+    down.whenReleased(new setCannon(0));//cannon down
+    left.whenReleased(new CannonToZero());//cannon reset
 
     YB.whenPressed(new fillToPSI(90));//long fill set
     BB.whenPressed(new fillToPSI(60));//mid fill set
     AB.whenPressed(new fillToPSI(30));// short set
-
-    /*YB.whenPressed(new horn(true));
-    YB.whenReleased(new horn(false));
-    BB.whenPressed(new FireCannon(true));
-    BB.whenReleased(new FireCannon(false));*/
-
-    XB.whenPressed(new FillVAlveToggle(true));//Manual on
-    XB.whenReleased(new FillVAlveToggle(false));//Manual off
-
-    RB.whenReleased(new SequentialCommandGroup(new horn(true), new WaitCommand(Constants.m_hornlenght), new horn(false), new WaitCommand(0.1), new FireCannon(true), new WaitCommand(0.1), new FireCannon(false)));//horn --> Fire
+    XB.whenPressed(new ManuelFill(true));//Manual on
+    XB.whenReleased(new ManuelFill(false));//Manual off
     
-    LB.whenPressed(new horn(true));//Horn on
-    LB.whenReleased(new horn(false));//Horn off
+    leftTrig.whenPressed(new horn(true));//Horn on
+    leftTrig.whenReleased(new horn(false));//Horn off
 
-    if (getLT() || getRT()) {
-      new FireCannon(true);
-    } else {
-      new FireCannon(false);
-    }
+    RightTrig.whenPressed(new FireCannon());
 
-    if (m_FillTankValve.getRelay()){
-      XboxC.setRumble(RumbleType.kLeftRumble, 1);
-      XboxC.setRumble(RumbleType.kRightRumble, 1);
-    }
+    // leftTrig.whenReleased()
+
   }
 }

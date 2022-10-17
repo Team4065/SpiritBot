@@ -35,7 +35,7 @@ public final class Constants {
     public static final double m_CannonStopPoint = 70;
     public static final double m_hornlenght = 0.5;
     public static final double m_Deadzone = 0.05;
-    public static final double m_FillValveTimeout = 6;
-    public static final double m_HornTimeout = 3;
+    public static final double m_FillValveTimeout = 5;
+    public static final double m_HornTimeout = 5;
     public static final double m_FirerValveTimeout = 5;
 }
