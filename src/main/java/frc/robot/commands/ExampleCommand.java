@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+<<<<<<< Updated upstream:src/main/java/frc/robot/commands/ExampleCommand.java
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
@@ -19,6 +20,16 @@ public class ExampleCommand extends CommandBase {
    */
   public ExampleCommand(ExampleSubsystem subsystem) {
     m_subsystem = subsystem;
+=======
+import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.RobotContainer;
+import frc.robot.subsystems.DriveTrain;
+
+public class Drive extends Command {
+  private DriveTrain driveTrain = RobotContainer.m_DriveTrain;
+  /** Creates a new TankDrive. */
+  public Drive() {
+>>>>>>> Stashed changes:src/main/java/frc/robot/commands/Drive.java
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }

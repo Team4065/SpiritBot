@@ -29,7 +29,7 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
   }
-
+  
   /**
    * This function is called every robot packet, no matter the mode. Use this for items like
    * diagnostics that you want ran during disabled, autonomous, teleoperated and test.
@@ -45,16 +45,17 @@ public class Robot extends TimedRobot {
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
   }
-
+  
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
   public void disabledInit() {}
-
+  
   @Override
   public void disabledPeriodic() {}
-
+  
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
+<<<<<<< Updated upstream
   public void autonomousInit() {
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
@@ -64,12 +65,17 @@ public class Robot extends TimedRobot {
     }
   }
 
+=======
+  public void autonomousInit() {}
+  
+>>>>>>> Stashed changes
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {}
-
+  
   @Override
   public void teleopInit() {
+<<<<<<< Updated upstream
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
@@ -79,9 +85,15 @@ public class Robot extends TimedRobot {
     }
   }
 
+=======
+    //new CannonToZero();
+  }
+  
+>>>>>>> Stashed changes
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+  }
 
   @Override
   public void testInit() {
